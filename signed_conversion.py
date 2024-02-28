@@ -25,6 +25,11 @@ def signed_binary_to_octal(binary):
     if binary[0] == '1':
         is_negative = True
 
+    # If the integer part is not divisible by 3, add '1' to the leftmost part
+    if is_negative:
+        integer_part = '1' * (3 - len(integer_part) % 3) + integer_part if len(integer_part) % 3 != 0 else integer_part
+        integer_part = '111' + integer_part
+    
     # Convert integer part to decimal
     for i in range(len(integer_part)):
         integer_decimal += int(integer_part[-i - 1]) * (2 ** i)
@@ -48,6 +53,7 @@ def signed_binary_to_octal(binary):
     if is_negative:
         answer = '7' + answer
     return answer
+
 
 def signed_binary_to_hexadecimal(binary):
     integer_part, fractional_part = binary.split('.') if '.' in binary else (binary, '0')
@@ -104,19 +110,19 @@ def signed_decimal_to_binary(x):
 
     # checking for radix
     if '.' in x:
-        whole = int(x[:x.index('.')])
-        frac = float(x) - whole
+        integer_part = int(x[:x.index('.')])
+        frac = float(x) - integer_part
 
-        temp_whole = []
+        temp_integer_part = []
 
         # conversion
         while True:
-            temp_whole.append('1' if int(whole) % 2 != 0 else '0')
+            temp_integer_part.append('1' if int(integer_part) % 2 != 0 else '0')
 
-            whole = whole // 2
-            if whole == 0:
-                temp_whole.reverse()
-                for i in temp_whole:
+            integer_part = integer_part // 2
+            if integer_part == 0:
+                temp_integer_part.reverse()
+                for i in temp_integer_part:
                     binary.append(i)
                 break
 
