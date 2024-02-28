@@ -1,5 +1,4 @@
-from conversion import binary_to_decimal, binary_to_octal, binary_to_hexadecimal, \
-    decimal_to_binary, octal_to_binary, hex_to_binary
+from conversion import binary_to_decimal, decimal_to_binary
 
 def binary_addition(binary1, binary2):
     # Convert binary numbers to decimal
